@@ -2,6 +2,8 @@
   --background-color: #282c34;
   --text-color: white;
   --link-color: #61dafb;
+  --secondary-background-color: #45e44d;
+  --secondary-text-color: #bfbfbf;
 }
 
 @media (prefers-color-scheme: light) {
@@ -41,4 +43,29 @@ body {
 
 .App-link {
   color: var(--link-color);
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 4px;
+  border: 1px solid var(--text-color);
+  background-color: transparent;
+  color: var(--text-color);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+.btn-primary {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+.mr-2 {
+  margin-right: 10px;
 }

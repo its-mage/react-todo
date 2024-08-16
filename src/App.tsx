@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 import './App.css';
-import Card, { CardProps } from './components/Card/Card';
+import Card from './components/Card/Card';
 import Dialog from './components/Dialog/Dialog';
+import AddTodo, { Todo } from './components/AddTodo';
 
 function App() {
-  const [todos] = useState<CardProps[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [isAddTodoDialogOpen, setIsAddTodoDialogOpen] = useState<boolean>(false);
+
+  function appendTodo(todo: Todo, isEditFlag: boolean) {
+    const existingTodos = [...todos];
+    if (!isEditFlag) {
+      existingTodos.push(todo);
+    } else {
+      const index = existingTodos.findIndex((t) => t.id === todo.id)
+      existingTodos[index] = todo
+    }
+    setTodos(existingTodos);
+    setIsAddTodoDialogOpen(false);
+  }
 
   return (
     <div className="App">
@@ -25,9 +38,10 @@ function App() {
              isOpen={isAddTodoDialogOpen}
              onClose={() => setIsAddTodoDialogOpen(false)}
             >
-              <div>
-                <h1>Add todo</h1>
-              </div>
+              <AddTodo
+                onSubmit={(todo, isEditFlag) => appendTodo(todo, isEditFlag)}
+                isEdit={false}
+              ></AddTodo>
             </Dialog>
           ) : (<></>)
         }
